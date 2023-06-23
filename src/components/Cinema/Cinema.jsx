@@ -6,6 +6,7 @@ import { useState } from 'react';
 import CinemaModal from './CinemaModal';
 import CinemaMenu from './CinemaMenu';
 import { useAxios } from '../hook/useAxios';
+import CinemaPaging from './CinemaPaging';
 
 const screenMenus = [
     {id:1, category:'all', name:'전체', isClass:true},
@@ -15,11 +16,22 @@ const screenMenus = [
 
 const Cinema = () => {
     //데이터
-    const { dataList, data,setData, loading, error} = useAxios('https://gist.githubusercontent.com/HajinKimm/99ff7a390542503799071196e19ae5c8/raw/8777331c0ee5c8ae4658a3704decee5d0d3a466f/Cinema')
+    const { dataList, data,setData, loading, error} = useAxios('https://gist.githubusercontent.com/HajinKimm/99ff7a390542503799071196e19ae5c8/raw/cfd4f76b1fa2c8306f405e560e1002bdbf8d5b36/Cinema')
     const [title, setTitle] =useState('all')
     const [clickData, setClickData] = useState(data[0])
     const [isOpen, setIsOpen] = useState(false)
     const [screenMenu, setScreenMenu] =useState(screenMenus)
+    
+    const [switchBtn, setSwitchBtn] = useState(false)
+    //페이징
+    const [currentPage, setCurrentPage] = useState(1)
+    const [postsPerpage, setPostsPerpage] = useState(8) //화면에 나올 게시물수
+    const totalPage = data.length;
+    const lastPost = currentPage * postsPerpage
+    const firstPost = lastPost - postsPerpage
+    const pageNumber = Math.ceil(totalPage/postsPerpage)
+    const currentPosts = data.slice(firstPost, lastPost)
+    const current = pageNumber=>setCurrentPage(pageNumber)
 
     //검색함수
     const onSearch =(txt)=>{
@@ -45,7 +57,7 @@ const Cinema = () => {
           }
           return number ? number.toString() : "";
     }
-    const formattedData = data.map(item => {
+    const formattedData = currentPosts.map(item => {
         const formattedAudiCnt = formatAccNumber(item.audiCnt);
         return { ...item, audiCnt:formattedAudiCnt };
       });
@@ -58,8 +70,9 @@ const Cinema = () => {
     const onClose=()=>{
         setIsOpen(false)
     }
-    //메뉴 - 전체/상영중/상영종료
+    //메뉴 - 전체/상영중/상영예정
     const onMenu=(category)=>{
+        current(1)
         setScreenMenu(screenMenu.map(item=>item.category ===category?{...item, isClass:true}:{...item, isClass:false}))
         if(category === 'all'){
             setData(dataList)
@@ -69,14 +82,20 @@ const Cinema = () => {
             console.log(dataList.filter(item=>item.screening === category))
         }
         setTitle(category)
+        category==='now'? setSwitchBtn(true) : setSwitchBtn(false)
     }
-    
+    const onSwitchBtn=()=>{
+        setSwitchBtn(!switchBtn)
+        switchBtn?onMenu('all'):onMenu('now')
+    }
+
     return (
         <Container>
-            <CinemaForm onSearch={onSearch} setData={setData} dataList={dataList}/>
-            <CinemaMenu screenMenu={screenMenu} onMenu={onMenu} data={data}/>
+            <CinemaForm onSearch={onSearch}/>
+            <CinemaMenu screenMenu={screenMenu} onMenu={onMenu} data={data} onSwitchBtn={onSwitchBtn} switchBtn={switchBtn}/>
             <CinemaList data={formattedData} onLike={onLike} onOpen={onOpen}/>
             { isOpen && <CinemaModal clickData={clickData} onClose={onClose}/> }
+            <CinemaPaging current={current} pageNumber={pageNumber} currentPage={currentPage} setCurrentPage={setCurrentPage}/>  
         </Container>
     );
 };

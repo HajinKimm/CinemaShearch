@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { CinemaSearchForm } from '../styled/CinemaStyle';
 import { useState } from 'react';
 
-const CinemaForm = ({onSearch, setData, dataList}) => {
+const CinemaForm = ({onSearch}) => {
     const [text, setText] = useState('')
     const [isplay,setIsplay] =useState(false)
+    
     const onSubmit =(e)=>{
         e.preventDefault()
         onSearch(text)

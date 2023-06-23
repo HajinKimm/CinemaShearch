@@ -45,10 +45,12 @@ export const CinemaItemBox = styled.article`
     }
     img{
             width: 100%;
+            height: 360px;
         }
     h2{
         img{
             width: 23px; 
+            height: 23px;
             margin-right: 8px;
         }
         margin: 10px 0px;
@@ -176,6 +178,7 @@ export const Popup = styled.div`
             .movieInfoText{
                 display: block;
                 width: 460px;
+                height: 457px;
                 h3{
                     font-size: 25px;
                     font-weight: 700;
@@ -196,16 +199,18 @@ export const Popup = styled.div`
                         }
                     }
                 }
-                strong{
-                    font-weight: 500;
-                    font-size: 18px;
-                    display: block;
-                    margin: 10px 0px 15px;
-                    
-                }
+                
                 p{
-                    
+                    margin-top: 20px;
+                    overflow:auto;
                     white-space: pre-line;
+                    height: 350px;
+                    strong{
+                        font-weight: 500;
+                        font-size: 18px;
+                        display: block;
+                        margin-bottom: 10px;
+                    }
                 }
                 
             }
@@ -233,9 +238,102 @@ div{
             background: ${subColor};
         }
     }
-
 }
-    .txt{
-        margin-bottom: 20px;
+.txt{
+    margin-bottom: 20px;
+    strong{
+        margin-right: 20px;
+        position: relative;
+        &:first-child::after{
+            content: '';
+            position: absolute;
+            display: block;
+            top: 0px; right: 0px;
+            width: 50px; height: 18px;
+            background: #000;
+        }
+    }
+    .switchBtnWrap {
+        position: relative;
+        display: inline-block;
+        width: 55px;
+        height: 30px;
+        margin-right: 10px;
+        input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        .onoffSwitch {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius:20px;
+            background-color: #ccc;
+            box-shadow: inset 1px 5px 1px #999;
+            transition: .4s;
+
+            /* 좌우 움직이는 키 */
+            &::before {
+                position: absolute;
+                content: "";
+                height: 22px;
+                width: 22px;
+                left: 4px;
+                bottom: 4px;
+                background-color: #fff;
+                transform: translateX(0px);
+                transition: .4s;
+                border-radius:20px;
+            }
+            &.on{
+                background-color: #F2D522;
+                box-shadow: inset 1px 5px 1px #E3AE56;
+                &::before {
+                    transform: translateX(26px);
+                }
+            }
+
+        }
+    }
+}
+`
+export const Paging = styled.p`
+    margin: 50px 0px;
+    text-align: center;
+    i{
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+        line-height: 50px;
+        font-weight: 700;
+        text-align: center;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+        box-sizing: border-box;
+        vertical-align: top;
+        display: inline-block;
+    }
+    a{
+        box-sizing: border-box;
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
+        font-weight: 700;
+        text-align: center;
+        line-height: 45px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        margin-right: 10px;
+        &.on{
+            background: ${mainColor};
+            color: #fff;
+            border: 1px solid ${mainColor};
+        }
     }
 `
