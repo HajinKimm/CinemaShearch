@@ -22,10 +22,9 @@ const Cinema = () => {
     const [clickData, setClickData] = useState(data[0]) 
     const [isOpen, setIsOpen] = useState(false)
     const [screenMenu, setScreenMenu] =useState(screenMenus)
-    const [screenNow,setScreenNow] = useState({})
-    
     const [switchBtn, setSwitchBtn] = useState(false)
-    //페이징
+    
+    //페이징   
     const [currentPage, setCurrentPage] = useState(1)
     const [postsPerpage, setPostsPerpage] = useState(8) //화면에 나올 게시물수
     const totalPage = data.length;
@@ -37,12 +36,14 @@ const Cinema = () => {
 
     //검색함수
     const onSearch =(txt)=>{
+        //전체 데이터에서 검색
         setData(dataList.filter(item=>item.movieNm.toLowerCase().includes(txt.toLowerCase())))
+        //검색시 '전체'메뉴로 변경
         if(title !== 'all'){
             onMenu('all')
         }
     }
-
+    //좋아요버튼 , 컬러변경, 숫자증가 감소
     const onLike=(movieCd)=>{
         setData(data.map(item=>item.movieCd===movieCd?{...item, isLike:!item.isLike, audiCnt:item.isLike?item.audiCnt-1:item.audiCnt+1}:item))
     }
