@@ -4,21 +4,30 @@ import { AiOutlineRight ,AiOutlineLeft} from "react-icons/ai";
 
 const CinemaPaging = ({current, pageNumber, currentPage,setCurrentPage}) => {
     let pageNum = [...Array(pageNumber).keys()].map(item=>item+1);
-    console.log(pageNum.length)
+    
+    //페이징버튼 클릭시 스크롤 맨위로
+    const pagingUp=()=>{
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     const onPrevPage=()=>{
-        if(currentPage > 1) setCurrentPage(currentPage-1)
+        if(currentPage > 1) {
+            setCurrentPage(currentPage-1)
+            pagingUp()
+        }
     }
     const onNextPage=()=>{
-        if(currentPage < pageNum.length) setCurrentPage(currentPage+1)
-
+        if(currentPage < pageNum.length) {
+            setCurrentPage(currentPage+1)
+            pagingUp()
+        }
     }
-        
     
     return (
         <Paging>
             <i onClick={onPrevPage}><AiOutlineLeft/></i>
             {
-                pageNum.map(item=><a href='#' key={item} onClick={(e)=>{e.preventDefault(); current(item);}} className={currentPage===item?'on':''}>{item}</a>)
+                pageNum.map(item=><a href='#' key={item} onClick={(e)=>{e.preventDefault(); current(item); pagingUp();}} className={currentPage===item?'on':''}>{item}</a>)
             }
             <i onClick={onNextPage}><AiOutlineRight/></i>
         </Paging>

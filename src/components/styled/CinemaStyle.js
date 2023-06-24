@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-const mainColor = '#ff4d80'
-const btnColor = '#ff004a'
+const mainColor = '#ff6987'
+const btnColor = '#ff0d3d'
 
 //Cinema
 export const Container = styled.div`
