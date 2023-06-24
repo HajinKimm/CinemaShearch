@@ -1,20 +1,13 @@
-# 영화 사이트 제작
-## 1. 파일 설명
--  [ ReactJS ]로 작성
+# 영화 사이트 
+## 1. 파일 설명 및 구조
+-  Vite ( React JS ) 로 작성
 -  styled components 이용
-
-    cinema 폴더 | hook폴더 | styled 폴더 |
-    |:---:|:---:|:---:|
-    Cinema.jsx (메인파일)|useAxios.jsx (데이터입력함수)| CinemaStyle.js (css - style)
-    CinemaForm.jsx (검색창)|-| Global.js (css - reset)
-    CinemaMenu.jsx (상단메뉴)|-| - 
-    CinemaList.jsx (데이터출력)|-| -
-    CinemaItem.jsx (데이터출력)|-| -
-    CinemaPaging.jsx (하단페이징)|-| -
-    CinemaModal.jsx (팝업창)|-| -
+- 파일 구조
+  
+    <img src="./md_images/file_Frame.jpg">
 ---
 ## 1.2 styled components
- - styled components를 이용하면,
+ - styled components 활용
     -  태그에 className을 작성하지 않고 태그명 자체를 className처럼 작성한다. 
     -  작성한 태그명을 이용하여 태그를 부여하여 css를 적용시킬 수 있다. 
 - 작성법 예시
@@ -77,7 +70,7 @@
         }
     }
     ```
-- [개봉작만 버튼] '상영중, 상영종료'관련 데이터만 출력 
+- [개봉작만 보기 버튼] '상영중, 상영종료'관련 데이터만 출력 
     <br>버튼 재클릭 시, 전체데이터 출력
     ```js
     const onSwitchBtn=()=>{
@@ -90,7 +83,9 @@
     ```
 - [좋아요버튼] 하트 클릭 시 데이터 색상 변경 및 숫자 증가
     ```js
-
+    const onLike=(movieCd)=>{
+        setData(data.map(item=>item.movieCd===movieCd?{...item, isLike:!item.isLike, audiCnt:item.isLike?item.audiCnt-1:item.audiCnt+1}:item))
+    }
     ```
 - 한 페이지에 8개의 데이터만 출력
     <br>다음페이지로 넘어가면 이 후의 데이터 출력
