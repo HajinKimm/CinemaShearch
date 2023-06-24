@@ -38,7 +38,12 @@
     const CinemaItemBox =  styled.article`(css내용 작성)`
     ```
 ---
-## 1.3 code 설명
+## 1.3 화면출력
+- 결과물 video
+    
+    <img src='./public/images/cinema_output.gif'>
+---
+## 1.4 code 설명
 - 영화제목 검색, 영문 작성시 대소문자를 구별하지 않고 검색 가능
     <br>키워드 검색 시 실시간 검색가능, 작성완료 후 enter누르면 값 초기화
     ```js
@@ -120,11 +125,6 @@
             })
     },[url])
     ```
----
-## 1.4 화면출력
-- 결과물 video
-    
-    <img src='./public/images/cinema_output.gif'>
 ---
 ### # 참고사이트
 -  메가박스 / 2023.06.21 / https://www.megabox.co.kr/
