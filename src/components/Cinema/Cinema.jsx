@@ -19,7 +19,7 @@ const Cinema = () => {
     //데이터
     const { dataList, data,setData, loading, error} = useAxios('https://gist.githubusercontent.com/HajinKimm/99ff7a390542503799071196e19ae5c8/raw/d34eefdc540a1d76a16c38b20b1aa7204dce753f/Cinema')
     const [title, setTitle] =useState('all')
-    const [clickData, setClickData] = useState(data[0])
+    const [clickData, setClickData] = useState(data[0]) 
     const [isOpen, setIsOpen] = useState(false)
     const [screenMenu, setScreenMenu] =useState(screenMenus)
     const [screenNow,setScreenNow] = useState({})
