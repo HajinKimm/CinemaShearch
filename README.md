@@ -1,12 +1,15 @@
 # 영화 사이트 
-## 1. 파일 설명 및 구조
+- 상영예정, 상영중, 상영종료 영화 정보에 대해 알 수 있다.
+- 영화 제목 검색을  통해 해당 영화 정보를 볼 수 있다.
+---
+## 1. 파일 구조
 -  Vite ( React JS ) 로 작성
 -  styled components 이용
 - 파일 구조
   
     <img src="./md_images/file_Frame.jpg">
 ---
-## 1.2 styled components
+## 2. styled components
  - styled components 활용
     -  태그에 className을 작성하지 않고 태그명 자체를 className처럼 작성한다. 
     -  작성한 태그명을 이용하여 태그를 부여하여 css를 적용시킬 수 있다. 
@@ -31,12 +34,12 @@
     const CinemaItemBox =  styled.article`(css내용 작성)`
     ```
 ---
-## 1.3 화면출력
+## 3. 화면출력
 - 결과물 video
     
     <img src='./public/images/cinema_output.gif'>
 ---
-## 1.4 code 설명
+## 4. code 설명
 - 영화제목 검색, 영문 작성시 대소문자를 구별하지 않고 검색 가능
     <br>키워드 검색 시 실시간 검색가능, 작성완료 후 enter누르면 값 초기화
     ```js
