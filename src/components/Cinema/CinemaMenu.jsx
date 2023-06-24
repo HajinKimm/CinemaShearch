@@ -11,12 +11,15 @@ const CinemaMenu = ({screenMenu, onMenu, data, switchBtn, onSwitchBtn}) => {
                 </button>)}
             </div>
             <div className='txt'> 
-                <p className='switchBtnWrap'>
-                    <input type="checkbox" />
-                    <span className={`onoffSwitch ${switchBtn?'on':''}`} onClick={onSwitchBtn}></span>
-                </p>
-                <strong>개봉작만</strong>
-                <strong>{data.length}개의 영화가 검색되었습니다.</strong>
+                <strong>총 {data.length}개의 영화가 검색되었습니다.</strong>
+                <div className="openingMovie">
+                    <strong>개봉작 보기</strong>
+                    <p className='switchBtnWrap'>
+                        <input type="checkbox" />
+                        <span className={`onoffSwitch ${switchBtn?'on':''}`} onClick={onSwitchBtn}></span>
+                    </p>
+
+                </div>
             </div>
         </CinemaMenuList>
     );

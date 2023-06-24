@@ -17,7 +17,13 @@ const CinemaItem = ({ item, onLike, onOpen }) => {
                 <li><i onClick={() => onLike(movieCd)}>{isLike ? <FcLike /> : <FcLikePlaceholder />}</i>{audiCnt}</li>
                 <li className='btn'>
                     {
-                        screening === "now" && <button>예매하기</button>
+                        screening === "now" && <button className='screenNow' onClick={() => onOpen(movieCd)} >예매하기</button>
+                    }
+                    {
+                        screening === "past" && <button  className='screenPast' onClick={() => onOpen(movieCd)} >상영종료</button>
+                    }
+                    {
+                        screening === "future" && <button  className='screenFuture' onClick={() => onOpen(movieCd)} >상영예정</button>
                     }
                     <button onClick={() => onOpen(movieCd) } className='infoBtn'>영화정보</button>
                 </li>

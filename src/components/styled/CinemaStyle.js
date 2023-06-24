@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-const mainColor = 'tomato'
-const subColor = '#84c1db'
+const mainColor = '#ff4d80'
+const btnColor = '#ff004a'
 
 //Cinema
 export const Container = styled.div`
@@ -22,8 +22,11 @@ export const CinemaSearchForm = styled.form`
     }
     button{
         font-size: 20px;
-        padding: 7px 10px;
+        padding: 7px 20px;
         vertical-align: top;
+        background: #000;
+        color: #fff;
+        border-radius: 2px;
     }
 
 `
@@ -81,26 +84,42 @@ export const CinemaItemBox = styled.article`
             &:last-child{
                 margin-left: 20px;
             }
-            i{
-                font-size: 25px;
+            
+        }
+        &:last-child{
+            li:first-child{
+                margin-top: 5px;
+                i{
+                font-size: 26px;
                 vertical-align: middle;
                 margin-right: 10px;
             }
-        }
-        &:last-child{
+            }
             justify-content:space-between;
             .btn{
                 button{
                     margin-top: 5px;
                     margin-right: 10px;
-                    background: ${mainColor};
-                    padding: 1px 10px;
+                    margin-bottom: 5px;
+                    padding: 3px 10px;
                     border-radius: 10px;
                     color: #fff;
                     line-height: 30px;
                     border: none;
                     &.infoBtn{
                         background:#444;
+                    }
+                    &.screenNow{
+                        background: ${btnColor};
+                        
+                    }
+                    &.screenPast{
+                        background: #999;
+                        
+                    }
+                    &.screenFuture{
+                        background: ${mainColor};
+                        
                     }
                 }
                 
@@ -140,6 +159,7 @@ export const Popup = styled.div`
                 white-space: nowrap;
             }
             div{
+                padding-top: 10px;
                 button{
                     margin-right: 20px;
                     font-size: 16px;
@@ -229,75 +249,78 @@ div{
         border-radius: 5px;
         font-size: 18px;
         box-sizing: border-box;
-        background:#aaa;
-        border: none;
+        background:transparent;
+        border: 1px solid ${mainColor};
         cursor: pointer;
-        color: #fff;
         font-weight: 700;
+        color: ${mainColor};
         &.on{
-            background: ${subColor};
+            color: #fff;
+            background: ${mainColor};
+            border:none;
         }
     }
 }
 .txt{
-    margin-bottom: 20px;
+    margin-top: 40px ;
+    margin-bottom: 0px;
+    display: flex; justify-content: space-between;
     strong{
-        margin-right: 20px;
         position: relative;
-        &:first-child::after{
-            content: '';
-            position: absolute;
-            display: block;
-            top: 0px; right: 0px;
-            width: 50px; height: 18px;
-            background: #000;
-        }
+        margin-left: 10px;
+        font-size:18px;
     }
-    .switchBtnWrap {
-        position: relative;
-        display: inline-block;
-        width: 55px;
-        height: 30px;
-        margin-right: 10px;
-        input {
-            opacity: 0;
-            width: 0;
-            height: 0;
+    .openingMovie{
+        padding-right: 20px;
+        strong{
+            margin-right: 20px;
         }
-        .onoffSwitch {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius:20px;
-            background-color: #ccc;
-            box-shadow: inset 1px 5px 1px #999;
-            transition: .4s;
-
-            /* 좌우 움직이는 키 */
-            &::before {
+        .switchBtnWrap {
+            position: relative;
+            display: inline-block;
+            width: 55px;
+            height: 30px;
+            margin-right: 10px;
+            input {
+                opacity: 0;
+                width: 0;
+                height: 0;
+            }
+            .onoffSwitch {
                 position: absolute;
-                content: "";
-                height: 22px;
-                width: 22px;
-                left: 4px;
-                bottom: 4px;
-                background-color: #fff;
-                transform: translateX(0px);
-                transition: .4s;
+                cursor: pointer;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
                 border-radius:20px;
-            }
-            &.on{
-                background-color: #F2D522;
-                box-shadow: inset 1px 5px 1px #E3AE56;
+                background-color: #ccc;
+                box-shadow: inset 1px 5px 1px #999;
+                transition: .4s;
+    
+                /* 좌우 움직이는 키 */
                 &::before {
-                    transform: translateX(26px);
+                    position: absolute;
+                    content: "";
+                    height: 22px;
+                    width: 22px;
+                    left: 4px;
+                    bottom: 4px;
+                    background-color: #fff;
+                    transform: translateX(0px);
+                    transition: .4s;
+                    border-radius:20px;
                 }
+                &.on{
+                    background-color: #F2D522;
+                    box-shadow: inset 1px 5px 1px #E3AE56;
+                    &::before {
+                        transform: translateX(26px);
+                    }
+                }
+    
             }
-
-        }
+    }
     }
 }
 `

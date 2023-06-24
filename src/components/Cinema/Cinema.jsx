@@ -11,16 +11,18 @@ import CinemaPaging from './CinemaPaging';
 const screenMenus = [
     {id:1, category:'all', name:'전체', isClass:true},
     {id:2, category:'now', name:'상영중', isClass:false},
-    {id:3, category:'pass', name:'상영종료', isClass:false},
+    {id:3, category:'future', name:'상영예정', isClass:false},
+    {id:4, category:'past', name:'상영종료', isClass:false},
 ]
 
 const Cinema = () => {
     //데이터
-    const { dataList, data,setData, loading, error} = useAxios('https://gist.githubusercontent.com/HajinKimm/99ff7a390542503799071196e19ae5c8/raw/cfd4f76b1fa2c8306f405e560e1002bdbf8d5b36/Cinema')
+    const { dataList, data,setData, loading, error} = useAxios('https://gist.githubusercontent.com/HajinKimm/99ff7a390542503799071196e19ae5c8/raw/d34eefdc540a1d76a16c38b20b1aa7204dce753f/Cinema')
     const [title, setTitle] =useState('all')
     const [clickData, setClickData] = useState(data[0])
     const [isOpen, setIsOpen] = useState(false)
     const [screenMenu, setScreenMenu] =useState(screenMenus)
+    const [screenNow,setScreenNow] = useState({})
     
     const [switchBtn, setSwitchBtn] = useState(false)
     //페이징
@@ -76,17 +78,23 @@ const Cinema = () => {
         setScreenMenu(screenMenu.map(item=>item.category ===category?{...item, isClass:true}:{...item, isClass:false}))
         if(category === 'all'){
             setData(dataList)
-            console.log(dataList)
         }else{
             setData(dataList.filter(item=>item.screening === category))
-            console.log(dataList.filter(item=>item.screening === category))
         }
         setTitle(category)
-        category==='now'? setSwitchBtn(true) : setSwitchBtn(false)
+        setSwitchBtn(false)
     }
+    //스위치번호
     const onSwitchBtn=()=>{
+        current(1)
         setSwitchBtn(!switchBtn)
-        switchBtn?onMenu('all'):onMenu('now')
+        if(!switchBtn){
+            setData(dataList.filter(item=>item.screening==='now'||item.screening==='past'))
+            setScreenMenu(screenMenu.map(item=>item.isClass?{...item, isClass:false}:item))
+        }else{
+            setScreenMenu(screenMenu.map(item=>item.category==='all'?{...item, isClass:true}:item))
+            setData(dataList)
+        }
     }
 
     return (
