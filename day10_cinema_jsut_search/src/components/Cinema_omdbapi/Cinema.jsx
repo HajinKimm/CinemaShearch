@@ -10,12 +10,13 @@ const Cinema = () => {
     const [data, setData] = useState([])
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(null)
-    const [text, setText] = useState()
+    const [text, setText] = useState('sun')
     
 
     useEffect(()=>{
         const APIKEY= `4ddfafc5`
         const url = `http://www.omdbapi.com/?apikey=${APIKEY}&s=${text}`
+        //const url = `http://www.omdbapi.com/?apikey=${APIKEY}&s=${text}&page=1-100` //페이지에 나오는 갯수 지정 오류
         axios.get(url)
             .then(res=>{
                 console.log(res.data.Search)
@@ -26,20 +27,21 @@ const Cinema = () => {
             .catch(error=>{
                 setData([])
                 setLoading(false)
-                setError(`주소가 올바르지 않습니다.`)
+                setError(`address is incorrect`)
             })
-
     },[text])
 
     const onSearch =(txt)=>{
         setText(txt)
-        console.log(text)
     }
 
     return (
         <Container>
             <CinemaForm onSearch={onSearch}/>
-            <CinemaList data={data}/>
+            { !loading && <h2>loading...</h2> }
+            { data && loading ? <CinemaList data={data} /> : <h2>Please enter another title...</h2>}
+            { error ? error : null }
+            
         </Container>
     );
 };

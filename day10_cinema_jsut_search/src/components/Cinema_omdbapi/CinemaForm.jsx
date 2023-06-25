@@ -11,11 +11,12 @@ const CinemaForm = ({onSearch}) => {
         onSearch(text)
         setText('')
         textRef.current.focus()
+        
     }
     return (
         <CinemaSearchForm onSubmit={onSubmit}>
             <input type="text" value={text} onChange={(e)=>setText(e.target.value)} ref={textRef}/>
-            <button type='submit'>검색</button>
+            <button type='submit'>search</button>
         </CinemaSearchForm>
     );
 };
