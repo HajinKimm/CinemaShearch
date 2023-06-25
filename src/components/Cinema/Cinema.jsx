@@ -25,14 +25,12 @@ const Cinema = () => {
     const [switchBtn, setSwitchBtn] = useState(false)
     
     //페이징   
-    const [currentPage, setCurrentPage] = useState(1)
-    const [postsPerpage, setPostsPerpage] = useState(8) //화면에 나올 게시물수
-    const totalPage = data.length;
-    const lastPost = currentPage * postsPerpage
-    const firstPost = lastPost - postsPerpage
-    const pageNumber = Math.ceil(totalPage/postsPerpage)
+    const [currentPage, setCurrentPage] = useState(1) // 현재 페이지
+    const postsPerpage = 8 //화면출력 게시물수
+    const lastPost = currentPage * postsPerpage //화면출력 첫번째 게시물
+    const firstPost = lastPost - postsPerpage //화면출력 마지막 게시물수
+    const pageNumber = Math.ceil( data.length / postsPerpage)
     const currentPosts = data.slice(firstPost, lastPost)
-    const current = pageNumber=>setCurrentPage(pageNumber)
 
     //검색함수
     const onSearch =(txt)=>{
@@ -75,7 +73,7 @@ const Cinema = () => {
     }
     //메뉴 - 전체/상영중/상영예정
     const onMenu=(category)=>{
-        current(1)
+        setCurrentPage(1)
         setScreenMenu(screenMenu.map(item=>item.category ===category?{...item, isClass:true}:{...item, isClass:false}))
         if(category === 'all'){
             setData(dataList)
@@ -87,7 +85,7 @@ const Cinema = () => {
     }
     //개봉작만 보기 스위치버튼
     const onSwitchBtn=()=>{
-        current(1)
+        setCurrentPage(1)
         setSwitchBtn(!switchBtn)
         if(!switchBtn){
             setData(dataList.filter(item=>item.screening==='now'||item.screening==='past'))
@@ -104,7 +102,7 @@ const Cinema = () => {
             <CinemaMenu screenMenu={screenMenu} onMenu={onMenu} data={data} onSwitchBtn={onSwitchBtn} switchBtn={switchBtn}/>
             <CinemaList data={formattedData} onLike={onLike} onOpen={onOpen}/>
             { isOpen && <CinemaModal clickData={clickData} onClose={onClose}/> }
-            <CinemaPaging current={current} pageNumber={pageNumber} currentPage={currentPage} setCurrentPage={setCurrentPage}/>  
+            <CinemaPaging pageNumber={pageNumber} currentPage={currentPage} setCurrentPage={setCurrentPage}/>  
         </Container>
     );
 };

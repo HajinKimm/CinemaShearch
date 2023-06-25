@@ -93,9 +93,12 @@
 - 한 페이지에 8개의 데이터만 출력
     <br>다음페이지로 넘어가면 이 후의 데이터 출력
     ```js
-    const onLike=(movieCd)=>{
-        setData(data.map(item=>item.movieCd===movieCd?{...item, isLike:!item.isLike, audiCnt:item.isLike?item.audiCnt-1:item.audiCnt+1}:item))
-    }
+    const [currentPage, setCurrentPage] = useState(1) // 현재 페이지
+    const postsPerpage = 8 //화면출력 게시물수
+    const lastPost = currentPage * postsPerpage //화면출력 첫번째 게시물 번호
+    const firstPost = lastPost - postsPerpage //화면출력 마지막 게시물 번호
+    const pageNumber = Math.ceil( data.length / postsPerpage) // 페이지 총 번호
+    const currentPosts = data.slice(firstPost, lastPost) //현재 화면출력 게시물
     ```
 - 영화이미지 혹은 영화정보버튼 클릭 시 팝업창띄우기
     ```js

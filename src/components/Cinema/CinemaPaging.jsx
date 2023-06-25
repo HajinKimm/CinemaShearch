@@ -2,7 +2,7 @@ import React from 'react';
 import { Paging } from '../styled/CinemaStyle';
 import { AiOutlineRight ,AiOutlineLeft} from "react-icons/ai";
 
-const CinemaPaging = ({current, pageNumber, currentPage,setCurrentPage}) => {
+const CinemaPaging = ({ pageNumber, currentPage,setCurrentPage}) => {
     let pageNum = [...Array(pageNumber).keys()].map(item=>item+1);
     
     //페이징버튼 클릭시 스크롤 맨위로
@@ -27,7 +27,7 @@ const CinemaPaging = ({current, pageNumber, currentPage,setCurrentPage}) => {
         <Paging>
             <i onClick={onPrevPage}><AiOutlineLeft/></i>
             {
-                pageNum.map(item=><a href='#' key={item} onClick={(e)=>{e.preventDefault(); current(item); pagingUp();}} className={currentPage===item?'on':''}>{item}</a>)
+                pageNum.map(item=><a href='#' key={item} onClick={(e)=>{e.preventDefault(); setCurrentPage(item); pagingUp();}} className={currentPage===item?'on':''}>{item}</a>)
             }
             <i onClick={onNextPage}><AiOutlineRight/></i>
         </Paging>
