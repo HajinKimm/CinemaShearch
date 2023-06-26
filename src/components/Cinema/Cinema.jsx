@@ -17,7 +17,7 @@ const screenMenus = [
 
 const Cinema = () => {
     //데이터
-    const { dataList, data,setData, loading, error} = useAxios('https://gist.githubusercontent.com/HajinKimm/99ff7a390542503799071196e19ae5c8/raw/f3c05aafda581a5558180bba20abf6a22b8975f6/Cinema')
+    const { dataList, data,setData, loading, error} = useAxios('https://gist.githubusercontent.com/HajinKimm/99ff7a390542503799071196e19ae5c8/raw/01bbbb7883382c4bd5056e1789bdb55f5805537c/Cinema.json')
     const [title, setTitle] =useState('all')
     const [clickData, setClickData] = useState(data[0]) 
     const [isOpen, setIsOpen] = useState(false)
